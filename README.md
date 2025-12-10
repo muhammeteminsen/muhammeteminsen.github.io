@@ -1,1 +1,0 @@
-# muhammeteminsen.github.io

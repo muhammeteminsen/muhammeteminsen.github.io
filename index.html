@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Developer Portfolio</title>
+    <title>Portfolio</title>
+    <link rel="icon" type="image/png" href="Source/promptefy.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -33,13 +34,12 @@
             </h1>
             <div id="hero-hidden-content" class="hidden-content">
                 <h2 data-en="Game Developer">Oyun Geliştiricisi</h2>
-                <p data-en="I create worlds with Unity and Unreal Engine. I love coding and storytelling.">
-                    Unity ve Unreal Engine ile dünyalar yaratıyorum. Kod yazmayı ve hikaye anlatmayı seviyorum.
+                <p data-en="I create worlds with Unity. I love coding.">
+                    Unity ile dünyalar yaratıyorum. Kod yazmayı seviyorum.
                 </p>
                 <div class="social-icons">
                     <a href="https://github.com/muhammeteminsen" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/muhammet-emin-%C5%9Fen-996571247/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-itch-io"></i></a>
                 </div>
                 <a href="#projects" class="btn" data-en="View Projects">Projelerimi Gör</a>
             </div>
@@ -54,10 +54,8 @@
 
     <section id="about" class="container">
         <h2 class="section-title" data-en="About Me">Hakkımda</h2>
-        <p class="about-text" data-en="A Game Developer candidate with solid knowledge of Unity and C#. Experienced in developing gameplay
-mechanics, UI systems, and AI behaviors. Eager to learn, quick to adapt, and passionate about creating engaging
-game experiences. Team-oriented and aiming to gain professional experience in game development.">
-            5 yıldır oyun geliştirme ile ilgileniyorum. C#, C++ dillerine hakimim. Shader programlama ve level design konularında kendimi geliştiriyorum. Amacım oyunculara unutulmaz deneyimler yaşatmak.
+        <p class="about-text" data-en="Unity Developer with a strong foundation in C# and OOP principles. Experienced in game development, rapid prototyping, and gameplay mechanics. Committed to writing clean, scalable code and delivering engaging player experiences.">
+           C# ve OOP ilkelerinde sağlam bir temele sahip Unity geliştiricisiyim. Oyun geliştirme, hızlı prototip oluşturma ve oyun mekaniği konusunda deneyimli. Temiz, ölçeklenebilir kod yazmaya ve ilgi çekici oyuncu deneyimleri sunmaya kendini adamış oyun geliştirici adayıyım.
         </p>
     </section>
 
@@ -67,33 +65,83 @@ game experiences. Team-oriented and aiming to gain professional experience in ga
             <button class="slider-btn prev-btn" onclick="moveSlide('projects-slider', -1)"><i class="fas fa-chevron-left"></i></button>
             <div class="slider-container">
                 <div class="slider-track" id="projects-slider">
+                    
                     <div class="slider-card">
-                        <div class="card-image" style="background-image: url('https://via.placeholder.com/400x200');"></div>
+                        <div class="card-image" style="background-image: url('Source/ControlTelekinesisGIF.gif');"></div>
                         <div class="card-content">
-                            <h3 data-en="Project Name 1">Proje Adı 1</h3>
-                            <p data-en="2D platformer game developed with Unity.">Unity ile geliştirilen 2D platform oyunu.</p>
+                            <h3 data-en="Control - Telekinesis">Control - Telekinezi</h3>
+                            <p data-en="Developed a telekinesis game prototype physics-based object interaction system using Unity’s Rigidbody component">
+                                Unity'nin Rigidbody bileşenini kullanarak telekinezi oyunu prototipi ve fizik tabanlı nesne etkileşim sistemi geliştirdim.
+                            </p>
                             <div class="tags"><span>Unity</span><span>C#</span></div>
-                            <a href="#" class="btn-small" target="_blank" data-en="Inspect">İncele</a>
+                            
+                            <div class="project-buttons">
+                                <a href="https://github.com/muhammeteminsen/MechanicPrototype" target="_blank" class="btn-code">
+                                    <i class="fab fa-github"></i> <span data-en="Code">Kod</span>
+                                </a>
+                                <a href="BURAYA_ITCHIO_LINKIN" target="_blank" class="btn-play">
+                                    <i class="fas fa-play"></i> <span data-en="Play">Oyna</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
+
                     <div class="slider-card">
-                        <div class="card-image" style="background-image: url('https://via.placeholder.com/400x200');"></div>
+                        <div class="card-image" style="background-image: url('Source/ChainAssassinationGIF.gif');"></div>
                         <div class="card-content">
-                            <h3 data-en="Project Name 2">Proje Adı 2</h3>
-                            <p data-en="FPS prototype made using Unreal Engine 5.">Unreal Engine 5 FPS prototipi.</p>
-                            <div class="tags"><span>UE5</span><span>C++</span></div>
-                            <a href="#" class="btn-small" target="_blank" data-en="Inspect">İncele</a>
+                            <h3 data-en="Asssassin Creed Mirage - Chain Assassination (In Development)">Asssassin Creed Mirage - Zincirleme Suikast (Geliştiriliyor)</h3>
+                            <p data-en=" Implemented a context-sensitive hit reaction system, triggering specific enemy animations based on the
+player's attack type."> Oyuncunun saldırı türüne bağlı olarak belirli düşman animasyonlarını tetikleyen, bağlama duyarlı bir vuruş tepki sistemi uyguladım</p>
+                            <div class="tags"><span>Unity</span><span>C#</span></div>
+                            
+                            <div class="project-buttons">
+                                <a href="https://github.com/muhammeteminsen/MechanicPrototype" target="_blank" class="btn-code">
+                                    <i class="fab fa-github"></i> <span data-en="Code">Kod</span>
+                                </a>
+                                <a href="#" target="_blank" class="btn-play">
+                                    <i class="fas fa-play"></i> <span data-en="Play">Oyna</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
+
                     <div class="slider-card">
-                        <div class="card-image" style="background-image: url('https://via.placeholder.com/400x200');"></div>
+                        <div class="card-image" style="background-image: url('Source/TrolleyProblemVRGIF.gif');"></div>
                         <div class="card-content">
-                            <h3 data-en="Mobile RPG">Mobil RPG</h3>
-                            <p data-en="Turn-based RPG for mobile.">Mobil için sıra tabanlı RPG.</p>
+                            <h3 data-en="Trolley Problem(VR)">Tren Vagonu Problemi (VR)</h3>
+                            <p data-en="Developed an immersive VR game simulating the "Trolley Problem" ethical dilemma">"Tren Vagonu Problemi" etik ikilemini simüle eden sürükleyici bir VR oyunu geliştirdim.</p>
                             <div class="tags"><span>Unity</span><span>Mobile</span></div>
-                            <a href="#" class="btn-small" target="_blank" data-en="Inspect">İncele</a>
+                            
+                            <div class="project-buttons">
+                                <a href="https://github.com/muhammeteminsen/TrolleyProblemVR" target="_blank" class="btn-code">
+                                    <i class="fab fa-github"></i> <span data-en="Code">Kod</span>
+                                </a>
+                                <a href="#" target="_blank" class="btn-play">
+                                    <i class="fas fa-play"></i> <span data-en="Play">Oyna</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
+<div class="slider-card">
+                        <div class="card-image" style="background-image: url('Source/MergeProjectGIF.gif');"></div>
+                        <div class="card-content">
+                            <h3 data-en="Merge Puzzle Mobile Game (In Development)">Birleştirme Puzzle Mobil Oyun (Geliştiriliyor)</h3>
+                            <p data-en="Built a grid-based system using 2D arrays to manage item placement and merging logic.
+">Objelerin yerleştirilmesi ve birleştirme mantığını yönetmek için 2 boyutlu diziler kullanan ızgara tabanlı bir sistem oluşturuldu.</p>
+                            <div class="tags"><span>Unity</span><span>Mobile</span></div>
+                            
+                            <div class="project-buttons">
+                                <a href="https://github.com/muhammeteminsen/TrolleyProblemVR" target="_blank" class="btn-code">
+                                    <i class="fab fa-github"></i> <span data-en="Code">Kod</span>
+                                </a>
+                                <a href="#" target="_blank" class="btn-play">
+                                    <i class="fas fa-play"></i> <span data-en="Play">Oyna</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
             <button class="slider-btn next-btn" onclick="moveSlide('projects-slider', 1)"><i class="fas fa-chevron-right"></i></button>
@@ -108,7 +156,7 @@ game experiences. Team-oriented and aiming to gain professional experience in ga
                 <div class="slider-track" id="jams-slider">
                     <div class="slider-card jam-card">
                         <div class="card-content">
-                            <h3>Global Game Jam 2024</h3>
+                            <h3>Arnavutkoy Game Jam</h3>
                             <p class="jam-date" data-en="48 Hours">48 Saat</p>
                             <p data-en="Theme: 'Make me laugh'.">Tema: "Make me laugh".</p>
                             <a href="#" class="jam-link" target="_blank" data-en="Play">Oyna <i class="fas fa-external-link-alt"></i></a>
@@ -142,39 +190,34 @@ game experiences. Team-oriented and aiming to gain professional experience in ga
             
             <div class="exp-card">
                 <div class="exp-logo">
-                    <img src="https://via.placeholder.com/100" alt="Company Logo">
+                    <img src="Source/SkilledHubLogo.jpeg" alt="Skilled Hub Logo">
                 </div>
                 <div class="exp-content">
-                    <h3 data-en="Junior Game Developer">Junior Game Developer</h3>
-                    <h4>X Oyun Stüdyosu</h4>
-                    <span class="exp-date" data-en="Jan 2023 - Present">Ocak 2023 - Günümüz</span>
-                    <p data-en="Developed hyper-casual games using Unity. Optimized game performance.">
+                    <h3 data-en="Game Developer Trainee">Game Developer Trainee</h3>
+                    <h4>Skilled Hub</h4>
+                    <span class="exp-date" data-en="July 2024 - January 2025">Temmuz 2024 - Ocak 2025</span>
+                    <p data-en="Awarded a scholarship for the Game Development bootcamp, gaining hands on experience in Unity & C#.">
                         Unity kullanarak hyper-casual oyunlar geliştirdim. Oyun performansını optimize ettim.
                     </p>
-                    <a href="https://sirketsitesi.com" target="_blank" class="exp-link">
-                        <i class="fas fa-link"></i> <span data-en="Company Website">Şirket Web Sitesi</span>
-                    </a>
                 </div>
             </div>
 
             <div class="exp-card">
                 <div class="exp-logo">
-                    <img src="https://via.placeholder.com/100" alt="Company Logo">
+                    <img src="Source/BEFGamesLogo.jpg" alt="BEF Games Logo">
                 </div>
                 <div class="exp-content">
-                    <h3 data-en="Game Design Intern">Game Design Intern</h3>
-                    <h4>Y Stüdyo</h4>
-                    <span class="exp-date" data-en="June 2022 - Aug 2022">Haziran 2022 - Ağustos 2022</span>
-                    <p data-en="Designed levels and core mechanics.">
-                        Level tasarımları ve temel mekaniklerin kurgulanması.
+                    <h3 data-en="Game Developer Intern">Game Developer Intern</h3>
+                    <h4>BEF Games</h4>
+                    <span class="exp-date" data-en="June 2025 - August 2025">Haziran 2025 - Ağustos 2025</span>
+                    <p data-en="Worked on audio integration for a PC game, ensuring proper implementation of sound assets.">
+                        Bir PC oyunu için ses entegrasyonu üzerinde çalışarak ses öğelerinin doğru şekilde uygulanmasını sağladım.
                     </p>
-                    <a href="#" target="_blank" class="exp-link">
-                        <i class="fas fa-link"></i> <span data-en="Project Link">Proje Linki</span>
+                    <a href="https://store.steampowered.com/app/2774040/The_Boss_Gangsters__Nightlife/" target="_blank" class="exp-link">
+                        <i class="fas fa-link"></i> <span data-en="Steam Project Link">Steam Proje Linki</span>
                     </a>
                 </div>
             </div>
-
-        </div>
     </section>
 
     <section id="education" class="container">
@@ -185,7 +228,9 @@ game experiences. Team-oriented and aiming to gain professional experience in ga
                 <div class="timeline-content">
                     <h3 data-en="Digital Game Design">Dijital Oyun Tasarımı</h3>
                     <h4 data-en="Beykoz University">Beykoz Üniversitesi</h4>
-                    <p data-en="Graduated with 3.00 GPA.">3.00 GPA ile mezuniyet.</p>
+                    <p data-en="Focused on software architecture, algorithms, and game programming.">
+                        Yazılım mimarisi, algoritmalar ve oyun programlamaya odaklandım.
+                    </p>
                 </div>
             </div>
         </div>

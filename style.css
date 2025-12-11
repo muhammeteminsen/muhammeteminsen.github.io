@@ -151,3 +151,89 @@ footer { text-align: center; padding: 40px; background-color: #0b1120; margin-to
 /* Kartlar için biraz gecikme ekleyelim ki hepsi aynı anda gelmesin (Opsiyonel şıklık) */
 .slider-card:nth-child(2) { transition-delay: 0.1s; }
 .slider-card:nth-child(3) { transition-delay: 0.2s; }
+
+/* Proje Butonları Düzenlemesi */
+.project-buttons {
+    display: flex;           /* Yan yana dizmek için */
+    gap: 10px;               /* Butonlar arası boşluk */
+    margin-top: 15px;        /* Yukarıdan boşluk */
+}
+
+/* Ortak Buton Stili */
+.btn-code, .btn-play {
+    padding: 8px 16px;       /* Buton içi dolgunluk */
+    border-radius: 5px;      /* Kenarları yuvarlat */
+    text-decoration: none;   /* Alt çizgiyi kaldır */
+    font-size: 0.9rem;       /* Yazı boyutu */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;                /* İkon ile yazı arası boşluk */
+}
+
+/* Kod Butonu (GitHub) - Koyu Renk */
+.btn-code {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #333;
+}
+
+.btn-code:hover {
+    background-color: #555;
+    transform: translateY(-2px); /* Üzerine gelince hafif yukarı çıksın */
+}
+
+/* Oyna Butonu (Itch.io) - Tema Rengi (Mor) */
+.btn-play {
+    background-color: #6a0dad; /* Senin sitenin mor rengi */
+    color: #fff;
+    border: 1px solid #6a0dad;
+}
+
+.btn-play:hover {
+    background-color: #8a2be2;
+    transform: translateY(-2px);
+}
+
+/* --- Buton Tasarımları (style.css en altına ekle) --- */
+
+.project-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap; 
+}
+
+.btn-code, .btn-play {
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    color: white !important; 
+}
+
+/* Kod Butonu (Koyu Gri) */
+.btn-code {
+    background-color: #333;
+    border: 1px solid #444;
+}
+.btn-code:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
+
+/* Oyna Butonu (Mor) */
+.btn-play {
+    background-color: #6a0dad;
+    border: 1px solid #6a0dad;
+}
+.btn-play:hover {
+    background-color: #8a2be2;
+    transform: translateY(-2px);
+}

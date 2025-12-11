@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setLanguage('en');
     } else {
         document.getElementById('lang-btn').innerText = 'EN';
-        runHeroSequence("Merhaba, ben ", "[Adın]");
-        typeWriterNav("[Adın Soyadın]");
+        runHeroSequence("Merhaba, ben ", "Emin");
+        typeWriterNav("Muhammet Emin Şen");
     }
 
     if(window.particlesJS) {
@@ -159,11 +159,12 @@ function setLanguage(lang) {
             if (el.getAttribute('data-tr')) el.innerHTML = el.getAttribute('data-tr');
         }
     });
-    if (lang === 'en') { runHeroSequence("Hi, I'm ", "[Name]"); typeWriterNav("[Full Name]"); } 
-    else { runHeroSequence("Merhaba, ben ", "[Adın]"); typeWriterNav("[Adın Soyadın]"); }
+    if (lang === 'en') { runHeroSequence("Hi, I'm ", "Emin"); typeWriterNav("Muhammet Emin Şen"); } 
+    else { runHeroSequence("Merhaba, ben ", "Emin"); typeWriterNav("Muhammet Emin Şen"); }
 }
 const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 let cursor = 0;
 document.addEventListener('keydown', (e) => {
     if (e.key === konamiCode[cursor]) { cursor++; if (cursor === konamiCode.length) { alert("🚀 GOD MODE ON! 🚀"); cursor = 0; } } else { cursor = 0; }
 });
+

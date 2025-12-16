@@ -184,13 +184,6 @@ footer { text-align: center; padding: 40px; background-color: #0b1120; margin-to
     transform: translateY(-2px); /* Üzerine gelince hafif yukarı çıksın */
 }
 
-/* Oyna Butonu (Itch.io) - Tema Rengi (Mor) */
-.btn-play {
-    background-color: #6a0dad; /* Senin sitenin mor rengi */
-    color: #fff;
-    border: 1px solid #6a0dad;
-}
-
 .btn-play:hover {
     background-color: #8a2be2;
     transform: translateY(-2px);

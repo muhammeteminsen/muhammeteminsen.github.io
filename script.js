@@ -167,19 +167,5 @@ let cursor = 0;
 document.addEventListener('keydown', (e) => {
     if (e.key === konamiCode[cursor]) { cursor++; if (cursor === konamiCode.length) { alert("🚀 GOD MODE ON! 🚀"); cursor = 0; } } else { cursor = 0; }
 });
-// ÇEREZ UYARISI KONTROLÜ
-const cookieBanner = document.getElementById("cookie-banner");
-const cookieBtn = document.querySelector("#cookie-banner button");
-
-// Eğer kullanıcı daha önce "Anladım" dediyse kutuyu gösterme
-if (localStorage.getItem("cookiesAccepted") === "true") {
-    cookieBanner.style.display = "none";
-}
-
-// Butona basınca kutuyu gizle ve hafızaya kaydet
-function acceptCookies() {
-    cookieBanner.style.display = "none";
-    localStorage.setItem("cookiesAccepted", "true");
-}
 
 

@@ -132,72 +132,27 @@ footer { text-align: center; padding: 40px; background-color: #0b1120; margin-to
 }
 
 /* --- SCROLL ANİMASYONLARI --- */
-
-/* Başlangıç Hali (Gizli) */
 .hidden-animate {
     opacity: 0;
-    filter: blur(5px); /* Hafif bulanık başlasın */
-    transform: translateY(100px) scale(0.9); /* Aşağıda ve biraz küçük */
-    transition: all 0.8s ease-out; /* Geçiş süresi */
+    filter: blur(5px);
+    transform: translateY(100px) scale(0.9);
+    transition: all 0.8s ease-out;
 }
-
-/* Görünür Hali (Canlı) */
 .show-animate {
     opacity: 1;
     filter: blur(0);
-    transform: translateY(0) scale(1); /* Yerine otursun */
+    transform: translateY(0) scale(1);
 }
-
-/* Kartlar için biraz gecikme ekleyelim ki hepsi aynı anda gelmesin (Opsiyonel şıklık) */
 .slider-card:nth-child(2) { transition-delay: 0.1s; }
 .slider-card:nth-child(3) { transition-delay: 0.2s; }
 
-/* Proje Butonları Düzenlemesi */
-.project-buttons {
-    display: flex;           /* Yan yana dizmek için */
-    gap: 10px;               /* Butonlar arası boşluk */
-    margin-top: 15px;        /* Yukarıdan boşluk */
-}
-
-/* Ortak Buton Stili */
-.btn-code, .btn-play {
-    padding: 8px 16px;       /* Buton içi dolgunluk */
-    border-radius: 5px;      /* Kenarları yuvarlat */
-    text-decoration: none;   /* Alt çizgiyi kaldır */
-    font-size: 0.9rem;       /* Yazı boyutu */
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;                /* İkon ile yazı arası boşluk */
-}
-
-/* Kod Butonu (GitHub) - Koyu Renk */
-.btn-code {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #333;
-}
-
-.btn-code:hover {
-    background-color: #555;
-    transform: translateY(-2px); /* Üzerine gelince hafif yukarı çıksın */
-}
-
-.btn-play:hover {
-    background-color: #8a2be2;
-    transform: translateY(-2px);
-}
-
-/* --- Buton Tasarımları (style.css en altına ekle) --- */
-
+/* --- BUTON TASARIMLARI (PROJE & JAM) --- */
 .project-buttons {
     display: flex;
     gap: 10px;
     margin-top: 15px;
     flex-wrap: wrap; 
 }
-
 .btn-code, .btn-play {
     padding: 8px 16px;
     border-radius: 5px;
@@ -210,23 +165,72 @@ footer { text-align: center; padding: 40px; background-color: #0b1120; margin-to
     transition: all 0.3s ease;
     color: white !important; 
 }
-
 /* Kod Butonu (Koyu Gri) */
-.btn-code {
-    background-color: #333;
-    border: 1px solid #444;
-}
-.btn-code:hover {
-    background-color: #555;
-    transform: translateY(-2px);
+.btn-code { background-color: #333; border: 1px solid #444; }
+.btn-code:hover { background-color: #555; transform: translateY(-2px); }
+/* Oyna Butonu (Mor) */
+.btn-play { background-color: #6a0dad; border: 1px solid #6a0dad; }
+.btn-play:hover { background-color: #8a2be2; transform: translateY(-2px); }
+
+/* --- COOKIE BANNER (SMOOTH ANIMASYONLU) --- */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1a1a1a; /* Koyu gri/siyah arka plan */
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+    z-index: 10000;
+    
+    /* Animasyon Başlangıç Durumu (Ekranın altında gizli) */
+    transform: translateY(100%);
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); /* Çok yumuşak geçiş */
 }
 
-/* Oyna Butonu (Mor) */
-.btn-play {
-    background-color: #6a0dad;
-    border: 1px solid #6a0dad;
+/* JavaScript ile eklenecek sınıf (Görünür yapar) */
+.cookie-banner.show {
+    transform: translateY(0);
 }
-.btn-play:hover {
+
+.cookie-banner p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    max-width: 800px;
+}
+
+.cookie-banner button {
+    background-color: #6a0dad; /* Senin mor rengin */
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap; /* Yazı alt satıra geçmesin */
+    transition: all 0.3s ease;
+}
+
+.cookie-banner button:hover {
     background-color: #8a2be2;
-    transform: translateY(-2px);
+    transform: scale(1.05);
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+    .cookie-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+    .cookie-banner button {
+        width: 100%; 
+        padding: 12px;
+    }
 }

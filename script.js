@@ -1,19 +1,36 @@
+// --- İÇERİK VERİLERİ (Dil Destekli) ---
+const content = {
+    tr: {
+        heroPrefix: "Merhaba, ben ",
+        heroName: "Emin",
+        logo: "Muhammet Emin Şen",
+        cookieText: "Sitemizde kullanıcı deneyimini iyileştirmek ve analiz yapmak için çerezler kullanılmaktadır. Gezinmeye devam ederek bunu kabul etmiş sayılırsınız.",
+        cookieBtn: "Anladım, Devam Et"
+    },
+    en: {
+        heroPrefix: "Hi, I'm ",
+        heroName: "Emin",
+        logo: "Muhammet Emin Şen",
+        cookieText: "We use cookies to improve user experience and analyze traffic. By continuing to browse, you agree to our use of cookies.",
+        cookieBtn: "Got it, Continue"
+    }
+};
+
 let activeIntervals = [];
+let slideIndices = { 'projects-slider': 0, 'jams-slider': 0 };
+let currentLang = localStorage.getItem('language') || 'en';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. BAŞLANGIÇ
     window.scrollTo(0, 0);
 
-    // 2. DİL
-    const storedLang = localStorage.getItem('language');
-    if (!storedLang || storedLang === 'en') {
-        setLanguage('en');
-    } else {
-        document.getElementById('lang-btn').innerText = 'EN';
-        runHeroSequence("Merhaba, ben ", "Emin");
-        typeWriterNav("Muhammet Emin Şen");
-    }
+    // 2. DİL AYARLAMALARI
+    setLanguage(currentLang);
 
+    // 3. COOKIE KONTROLÜ (HER SEFERİNDE ÇALIŞACAK ŞEKİLDE AYARLANDI)
+    showCookieBanner();
+
+    // 4. PARTICLES JS
     if(window.particlesJS) {
         particlesJS("particles-js", {
             "particles": {
@@ -21,21 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "color": { "value": "#ffffff" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.5, "random": true },
-                
-                // --- BURAYI DEĞİŞTİRDİM ---
-                "size": { 
-                    "value": 1.5,  // Eskiden 3'tü, şimdi 1.5 yaptık (Daha küçük)
-                    "random": true // Rastgele boyutlarda olsun (doğallık katar)
-                },
-                // ---------------------------
-
-                "line_linked": { 
-                    "enable": true, 
-                    "distance": 150, 
-                    "color": "#8b5cf6", 
-                    "opacity": 0.2, 
-                    "width": 1 // Çizgiler kalın gelirse burayı da 0.5 yapabilirsin
-                },
+                "size": { "value": 1.5, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#8b5cf6", "opacity": 0.2, "width": 1 },
                 "move": { "enable": true, "speed": 2 } 
             },
             "interactivity": { "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } } },
@@ -43,42 +47,141 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 5. SLIDER & SCROLL
     duplicateSlides('projects-slider');
     duplicateSlides('jams-slider');
-
-    // 4. SCROLL İŞLEMLERİ (Smooth Scroll & Animasyon)
     setupSmoothScrollCenter();
-    setupScrollAnimations(); // YENİ EKLENEN FONKSİYON
+    setupScrollAnimations();
 });
 
-// --- YENİ: GÖRÜNÜR OLUNCA AÇILIP KAPANAN ANİMASYON ---
-function setupScrollAnimations() {
-    // Animasyon uygulanacak elementleri seç
-    // (Barlar, Kartlar, Bölümler, Hero içindeki yazılar)
-    const observerElements = document.querySelectorAll('.tech-stack-bar, .section-title, .slider-card, .exp-card, .about-text, .timeline-item');
+// --- COOKIE FONKSİYONLARI (DEĞİŞTİRİLDİ) ---
+function showCookieBanner() {
+    const banner = document.getElementById("cookie-banner");
+    
+    // Artık localStorage kontrolü yapmıyoruz.
+    // Her sayfa yenilendiğinde 2 saniye sonra banner çıkacak.
+    setTimeout(() => {
+        if(banner) {
+            banner.classList.add("show");
+        }
+    }, 2000);
+}
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            // Ekrana girdi mi?
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show-animate');
-            } else {
-                // Ekrandan çıktı mı? (Sınıfı sil ki tekrar gelince animasyon baştan başlasın)
-                entry.target.classList.remove('show-animate');
-            }
-        });
-    }, {
-        threshold: 0.15 // Öğenin %15'i görününce tetikle
+function acceptCookies() {
+    const banner = document.getElementById("cookie-banner");
+    if(banner) {
+        banner.classList.remove("show"); // Sınıfı sil (Aşağı kayarak kaybolur)
+    }
+    // localStorage'a kaydetme işlemini kaldırdık, böylece bir dahaki girişte unutmuş olacak.
+}
+
+function updateCookieText() {
+    const textEl = document.getElementById("cookie-text");
+    const btnEl = document.getElementById("cookie-btn");
+    
+    if(textEl && btnEl) {
+        textEl.textContent = content[currentLang].cookieText;
+        btnEl.textContent = content[currentLang].cookieBtn;
+    }
+}
+
+// --- DİL VE HERO SEQUENCE ---
+function toggleLanguage() {
+    const newLang = currentLang === 'en' ? 'tr' : 'en';
+    setLanguage(newLang);
+}
+
+function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('language', lang);
+    clearAllTypeWriters();
+
+    const btn = document.getElementById('lang-btn');
+    if(btn) btn.innerText = lang === 'en' ? 'TR' : 'EN';
+
+    // HTML içindeki data-en etiketlerini güncelle
+    const elements = document.querySelectorAll('[data-en]');
+    elements.forEach(el => {
+        if (lang === 'en') {
+            if (!el.getAttribute('data-tr')) el.setAttribute('data-tr', el.innerHTML);
+            el.innerHTML = el.getAttribute('data-en');
+        } else {
+            if (el.getAttribute('data-tr')) el.innerHTML = el.getAttribute('data-tr');
+        }
     });
 
-    // Seçilen her elemente başlangıç sınıfını ekle ve izlemeye başla
+    // Hero Typewriter Başlat
+    const prefix = content[lang].heroPrefix;
+    const name = content[lang].heroName;
+    runHeroSequence(prefix, name);
+    typeWriterNav(content[lang].logo);
+    
+    // Cookie metnini de güncelle
+    updateCookieText();
+}
+
+function runHeroSequence(prefixText, nameText) {
+    const prefixEl = document.getElementById('hero-prefix');
+    const nameEl = document.getElementById('hero-name');
+    const hiddenContent = document.getElementById('hero-hidden-content');
+    
+    if(prefixEl && nameEl && hiddenContent) {
+        prefixEl.innerHTML = ""; 
+        nameEl.innerHTML = ""; 
+        hiddenContent.classList.remove('visible');
+        
+        typeWriterCore(prefixText, prefixEl, () => {
+            typeWriterCore(nameText, nameEl, () => { 
+                hiddenContent.classList.add('visible'); 
+            });
+        });
+    }
+}
+
+function typeWriterNav(text) { 
+    const el = document.getElementById('nav-logo'); 
+    if(el) {
+        el.innerHTML = ""; 
+        typeWriterCore(text, el, null); 
+    }
+}
+
+function typeWriterCore(text, element, callback) {
+    let i = 0;
+    let interval = setInterval(() => {
+        if (i < text.length) { 
+            element.innerHTML += text.charAt(i); 
+            i++; 
+        } else { 
+            clearInterval(interval); 
+            if (callback) callback(); 
+        }
+    }, 100);
+    activeIntervals.push(interval);
+}
+
+function clearAllTypeWriters() { 
+    activeIntervals.forEach(id => clearInterval(id)); 
+    activeIntervals = []; 
+}
+
+// --- SCROLL ANİMASYONLARI ---
+function setupScrollAnimations() {
+    const observerElements = document.querySelectorAll('.tech-stack-bar, .section-title, .slider-card, .exp-card, .about-text, .timeline-item');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show-animate');
+            }
+        });
+    }, { threshold: 0.15 });
+
     observerElements.forEach((el) => {
         el.classList.add('hidden-animate');
         observer.observe(el);
     });
 }
 
-// --- MEVCUT YUMUŞAK KAYDIRMA ---
 function setupSmoothScrollCenter() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -93,17 +196,21 @@ function setupSmoothScrollCenter() {
     });
 }
 
-// --- DİĞER FONKSİYONLAR (AYNEN KORUNDU) ---
-function clearAllTypeWriters() { activeIntervals.forEach(id => clearInterval(id)); activeIntervals = []; }
-function duplicateSlides(sliderId) { const track = document.getElementById(sliderId); track.innerHTML += track.innerHTML; }
-let slideIndices = { 'projects-slider': 0, 'jams-slider': 0 };
+// --- SLIDER ---
+function duplicateSlides(sliderId) { 
+    const track = document.getElementById(sliderId); 
+    if(track) track.innerHTML += track.innerHTML; 
+}
 
 function moveSlide(sliderId, direction) {
     const track = document.getElementById(sliderId);
+    if(!track) return;
+    
     const cards = track.getElementsByClassName('slider-card');
     const cardsPerView = window.innerWidth > 768 ? 2 : 1;
     const totalCards = cards.length;
     slideIndices[sliderId] += direction;
+    
     if (slideIndices[sliderId] < 0) { slideIndices[sliderId] = 0; }
     if (slideIndices[sliderId] > totalCards - cardsPerView) {
         track.style.transition = 'none';
@@ -121,50 +228,9 @@ function moveSlide(sliderId, direction) {
     track.style.transform = `translateX(-${slideIndices[sliderId] * cardWidthPx}px)`;
 }
 
-function runHeroSequence(prefixText, nameText) {
-    clearAllTypeWriters();
-    const prefixEl = document.getElementById('hero-prefix');
-    const nameEl = document.getElementById('hero-name');
-    const hiddenContent = document.getElementById('hero-hidden-content');
-    prefixEl.innerHTML = ""; nameEl.innerHTML = ""; hiddenContent.classList.remove('visible');
-    typeWriterCore(prefixText, prefixEl, () => {
-        typeWriterCore(nameText, nameEl, () => { hiddenContent.classList.add('visible'); });
-    });
-}
-function typeWriterNav(text) { const el = document.getElementById('nav-logo'); el.innerHTML = ""; typeWriterCore(text, el, null); }
-function typeWriterCore(text, element, callback) {
-    let i = 0;
-    let interval = setInterval(() => {
-        if (i < text.length) { element.innerHTML += text.charAt(i); i++; } 
-        else { clearInterval(interval); if (callback) callback(); }
-    }, 100);
-    activeIntervals.push(interval);
-}
-function toggleLanguage() {
-    const currentLang = localStorage.getItem('language') || 'en';
-    const newLang = currentLang === 'en' ? 'tr' : 'en';
-    setLanguage(newLang);
-}
-function setLanguage(lang) {
-    clearAllTypeWriters();
-    localStorage.setItem('language', lang);
-    const btn = document.getElementById('lang-btn');
-    if(btn) btn.innerText = lang === 'en' ? 'TR' : 'EN';
-    const elements = document.querySelectorAll('[data-en]');
-    elements.forEach(el => {
-        if (lang === 'en') {
-            if (!el.getAttribute('data-tr')) el.setAttribute('data-tr', el.innerHTML);
-            el.innerHTML = el.getAttribute('data-en');
-        } else {
-            if (el.getAttribute('data-tr')) el.innerHTML = el.getAttribute('data-tr');
-        }
-    });
-    if (lang === 'en') { runHeroSequence("Hi, I'm ", "Emin"); typeWriterNav("Muhammet Emin Şen"); } 
-    else { runHeroSequence("Merhaba, ben ", "Emin"); typeWriterNav("Muhammet Emin Şen"); }
-}
+// KONAMI CODE
 const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 let cursor = 0;
 document.addEventListener('keydown', (e) => {
     if (e.key === konamiCode[cursor]) { cursor++; if (cursor === konamiCode.length) { alert("🚀 GOD MODE ON! 🚀"); cursor = 0; } } else { cursor = 0; }
 });
-

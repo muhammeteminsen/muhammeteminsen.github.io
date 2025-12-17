@@ -4,14 +4,14 @@ const content = {
         heroPrefix: "Merhaba, ben ",
         heroName: "Emin",
         logo: "Muhammet Emin Şen",
-        cookieText: "Sitemizde kullanıcı deneyimini iyileştirmek ve analiz yapmak için çerezler kullanılmaktadır. Gezinmeye devam ederek bunu kabul etmiş sayılırsınız.",
+        cookieText: "Sitemizde analiz yapmak için çerezler kullanılmaktadır. Gezinmeye devam ederek bunu kabul etmiş sayılırsınız.",
         cookieBtn: "Anladım, Devam Et"
     },
     en: {
         heroPrefix: "Hi, I'm ",
         heroName: "Emin",
         logo: "Muhammet Emin Şen",
-        cookieText: "We use cookies to improve user experience and analyze traffic. By continuing to browse, you agree to our use of cookies.",
+        cookieText: "We use cookies to analyze traffic. By continuing to browse, you agree to our use of cookies.",
         cookieBtn: "Got it, Continue"
     }
 };

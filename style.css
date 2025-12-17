@@ -234,3 +234,35 @@ footer { text-align: center; padding: 40px; background-color: #0b1120; margin-to
         padding: 12px;
     }
 }
+
+/* --- MOBİL DİL BUTONU AYARLARI --- */
+
+/* Varsayılan olarak (PC'de) gizle */
+#mobile-lang-btn {
+    display: none;
+}
+
+/* Sadece Mobilde (768px altı) Göster */
+@media (max-width: 768px) {
+    #mobile-lang-btn {
+        display: block; /* Görünür yap */
+        position: absolute;
+        right: 20px; /* Sağdan boşluk */
+        top: 25px;   /* Yukarıdan boşluk */
+        background: transparent;
+        border: 1px solid var(--accent-color);
+        color: var(--accent-color);
+        padding: 5px 12px;
+        border-radius: 5px;
+        font-family: var(--font-main);
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        z-index: 101; /* En üstte dursun */
+    }
+
+    #mobile-lang-btn:active {
+        background-color: var(--accent-color);
+        color: white;
+    }
+}

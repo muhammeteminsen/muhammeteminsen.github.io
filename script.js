@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. DİL AYARLAMALARI
     setLanguage(currentLang);
 
-    // 3. COOKIE KONTROLÜ (HER SEFERİNDE ÇALIŞACAK ŞEKİLDE AYARLANDI)
+    // 3. COOKIE KONTROLÜ
     showCookieBanner();
 
     // 4. PARTICLES JS
@@ -54,12 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setupScrollAnimations();
 });
 
-// --- COOKIE FONKSİYONLARI (DEĞİŞTİRİLDİ) ---
+// --- COOKIE FONKSİYONLARI ---
 function showCookieBanner() {
     const banner = document.getElementById("cookie-banner");
-    
-    // Artık localStorage kontrolü yapmıyoruz.
-    // Her sayfa yenilendiğinde 2 saniye sonra banner çıkacak.
     setTimeout(() => {
         if(banner) {
             banner.classList.add("show");
@@ -70,9 +67,8 @@ function showCookieBanner() {
 function acceptCookies() {
     const banner = document.getElementById("cookie-banner");
     if(banner) {
-        banner.classList.remove("show"); // Sınıfı sil (Aşağı kayarak kaybolur)
+        banner.classList.remove("show");
     }
-    // localStorage'a kaydetme işlemini kaldırdık, böylece bir dahaki girişte unutmuş olacak.
 }
 
 function updateCookieText() {
@@ -96,8 +92,14 @@ function setLanguage(lang) {
     localStorage.setItem('language', lang);
     clearAllTypeWriters();
 
+    // HEM MASAÜSTÜ HEM MOBİL BUTONUNU GÜNCELLE
     const btn = document.getElementById('lang-btn');
-    if(btn) btn.innerText = lang === 'en' ? 'TR' : 'EN';
+    const mobileBtn = document.getElementById('mobile-lang-btn');
+    
+    const text = lang === 'en' ? 'TR' : 'EN';
+    
+    if(btn) btn.innerText = text;
+    if(mobileBtn) mobileBtn.innerText = text; // Mobil buton yazısını da değiştir
 
     // HTML içindeki data-en etiketlerini güncelle
     const elements = document.querySelectorAll('[data-en]');
